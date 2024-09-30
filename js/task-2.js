@@ -1,44 +1,27 @@
-const getUsersWithFriend = (users, friendName) => {
-  return users.filter(user => user.friends.includes(friendName));
-};
-
-// Проверка с исходным массивом
-const allUsers = [
-  {
-    name: "Moore Hensley",
-    friends: ["Sharron Pace"]
-  },
-  {
-    name: "Sharlene Bush",
-    friends: ["Briana Decker", "Sharron Pace"]
-  },
-  {
-    name: "Ross Vazquez",
-    friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"]
-  },
-  {
-    name: "Elma Head",
-    friends: ["Goldie Gentry", "Aisha Tran"]
-  },
-  {
-    name: "Carey Barr",
-    friends: ["Jordan Sampson", "Eddie Strong"]
-  },
-  {
-    name: "Blackburn Dotson",
-    friends: ["Jacklyn Lucas", "Linda Chapman"]
-  },
-  {
-    name: "Sheree Anthony",
-    friends: ["Goldie Gentry", "Briana Decker"]
+class Storage {
+  #items;
+  constructor(items) {
+    this.#items = items;
   }
-];
+  getItems() {
+    return this.#items;
+  }
+  addItem(newItem) {
+    this.#items.push(newItem);
+  }
+  removeItem(itemToRemove) {
+    this.#items = this.#items.filter(item => item !== itemToRemove);
+  }
+}
 
-console.log(getUsersWithFriend(allUsers, "Briana Decker")); 
-// Ожидаемый результат: ["Sharlene Bush", "Sheree Anthony"]
+const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
 
-console.log(getUsersWithFriend(allUsers, "Goldie Gentry")); 
-// Ожидаемый результат: ["Elma Head", "Sheree Anthony"]
+storage.addItem("Droid");
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
 
-console.log(getUsersWithFriend(allUsers, "Adrian Cross")); 
-// Ожидаемый результат: []
+storage.removeItem("Prolonger");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+
+storage.removeItem("Scaner");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
